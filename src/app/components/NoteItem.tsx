@@ -1,7 +1,11 @@
 import Link from "next/link";
 import React from "react";
+import { Note } from "../notes/type";
 
-const NoteItem = () => {
+type NoteProps = {
+    note: Note
+}
+const NoteItem = ({ note }: NoteProps) => {
   return (
     <div className="bg-gray-100 rounded-lg p-5 relative">
       <Link href="/notes" className="absolute -top-4 left-4">
@@ -18,8 +22,9 @@ const NoteItem = () => {
       </Link>
       <Link href="/notes">
         <h3 className="text-purple-500 hover:text-purple-700 text-lg md:text-xl font-semibold mb-3 underline">
-          ダミーテキスト
+          {  note.title }
         </h3>
+        { note.content }
       </Link>
     </div>
   );
