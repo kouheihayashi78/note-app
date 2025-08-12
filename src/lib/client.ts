@@ -1,3 +1,4 @@
+import { Note } from "@/app/notes/type";
 import { createClient } from "microcms-js-sdk";
 
 // microcms-js-sdkのセットアップ
@@ -8,8 +9,8 @@ export const client = createClient({
 
 // ノート一覧取得
 export const getNotesList = async () => {
-  const noteList = await client.get({
+  const noteList = await client.getList<Note>({
     endpoint: "notes",
   });
-  return noteList.contents;
+  return noteList;
 };
