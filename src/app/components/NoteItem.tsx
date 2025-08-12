@@ -3,8 +3,22 @@ import React from "react";
 import { Note } from "../notes/type";
 
 type NoteProps = {
-    note: Note
-}
+  note: Note;
+};
+
+const getPlainTextExcerpt = (html: string, maxLength: number = 15): string => {
+  // htmlタグを削除する
+  const text = html
+    .replace(/<[^>]*>/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  const chars = Array.from(text);
+  // 15文字より大きい場合は、16文字目以降を削除して「...」をつける
+  return chars.length > maxLength
+    ? chars.slice(0, maxLength).join("") + "..."
+    : text;
+};
+
 const NoteItem = ({ note }: NoteProps) => {
   return (
     <div className="bg-gray-100 rounded-lg p-5 relative">
@@ -22,9 +36,9 @@ const NoteItem = ({ note }: NoteProps) => {
       </Link>
       <Link href="/notes">
         <h3 className="text-purple-500 hover:text-purple-700 text-lg md:text-xl font-semibold mb-3 underline">
-          {  note.title }
+          {note.title}
         </h3>
-        { note.content }
+        {getPlainTextExcerpt(note.content)}
       </Link>
     </div>
   );
