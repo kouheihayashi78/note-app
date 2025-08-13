@@ -1,6 +1,9 @@
 import Link from "next/link";
 import React from "react";
 import { Note } from "../notes/type";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 
 type NoteProps = {
   note: Note;
@@ -19,7 +22,16 @@ const getPlainTextExcerpt = (html: string, maxLength: number = 15): string => {
     : text;
 };
 
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+const formatCommon = (format: string, date: string): string => {
+  return dayjs.utc(date).tz("Asia/Tokyo").format(format) as string;
+};
+
 const NoteItem = ({ note }: NoteProps) => {
+  const date = formatCommon("YYYY年MM月DD日 hh:mm", note.createdAt);
+
   return (
     <div className="bg-gray-100 rounded-lg p-5 relative">
       <Link href="/notes" className="absolute -top-4 left-4">
@@ -35,9 +47,12 @@ const NoteItem = ({ note }: NoteProps) => {
         </span>
       </Link>
       <Link href="/notes">
-        <h3 className="text-purple-500 hover:text-purple-700 text-lg md:text-xl font-semibold mb-3 underline">
-          {note.title}
-        </h3>
+        <div className="flex items-center mb-3 gap-3">
+          <h3 className="text-purple-500 hover:text-purple-700 text-lg md:text-xl font-semibold underline">
+            {note.title}
+          </h3>
+          <h5>{date}</h5>
+        </div>
         {getPlainTextExcerpt(note.content)}
       </Link>
     </div>
