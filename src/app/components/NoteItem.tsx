@@ -34,7 +34,7 @@ const NoteItem = ({ note }: NoteProps) => {
 
   return (
     <div className="bg-gray-100 rounded-lg p-5 relative">
-      <Link href="/notes" className="absolute -top-4 left-4">
+      <Link href={`/notes/${note.id}`} className="absolute -top-4 left-4">
         <span className="w-8 h-8 inline-flex justify-center items-center bg-purple-500 hover:bg-purple-700 text-white rounded-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +46,7 @@ const NoteItem = ({ note }: NoteProps) => {
           </svg>
         </span>
       </Link>
-      <Link href="/notes">
+      <Link href={`/notes/${note.id}`}>
         <div className="flex items-center mb-3 gap-3">
           <h3 className="text-purple-500 hover:text-purple-700 text-lg md:text-xl font-semibold underline">
             {note.title}
