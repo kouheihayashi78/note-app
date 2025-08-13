@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+ul {
+    padding: 15px;
+}
+
+li {
+    list-style-type: disc;
+}
