@@ -2,7 +2,7 @@ name: Manually deploy
 on:
   repository_dispatch:
     # microCMSのWebhookトリガーイベント名
-    types: [updated-post]
+    types: [updated-note]
 
 jobs:
   deploy:
