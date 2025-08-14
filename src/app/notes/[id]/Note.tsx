@@ -1,9 +1,10 @@
 import React from "react";
-import { Note } from "../type";
+// 下のコンポーネントとimportした型の競合が起きたため、このように記述している
+import type { Note as NoteType } from "../type";
 import parse from "html-react-parser";
 
 type NoteProps = {
-  note: Note;
+  note: NoteType;
 };
 
 const Note = ({ note }: NoteProps) => {
